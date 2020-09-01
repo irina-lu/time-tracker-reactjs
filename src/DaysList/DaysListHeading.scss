@@ -1,0 +1,28 @@
+@import '../assets/color.scss';
+@import '../assets/heading-btn';
+
+.days-list__heading {
+    padding-left: 24px;
+    padding-right: 100px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 49px;
+}
+
+.day__filter {
+    &_margin {
+        margin-left: auto;
+        margin-right: 23px;
+    }
+
+    &:last-of-type {
+        padding-right: 33px;
+    }
+}
+
+.day__filter_active {
+    padding: 10px 27px 11px 29px;
+    color: $font-dark-gray;
+    background-color: $light-gray;
+    border-radius: 30px;
+}
