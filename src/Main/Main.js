@@ -2,6 +2,7 @@ import React from "react";
 import "./Main.scss";
 import MainScreen from "../MainScreen/MainScreen";
 import TimeTracking from "../TimeTracking/TimeTracking";
+import GoogleSync from "../GoogleSync/GoogleSync";
 
 function Main() {
   return (
@@ -9,7 +10,7 @@ function Main() {
       <h1 className="visually-hidden">Time Tracker</h1>
       <MainScreen />
       <TimeTracking />
-      {/* <GoogleSync /> */}
+      <GoogleSync />
     </main>
   );
 }
