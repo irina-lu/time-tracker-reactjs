@@ -29,7 +29,7 @@ function GoogleSync() {
           type="checkbox"
           name="sync-checkbox"
         />
-        <label for="google-check" className="google-sync__label"></label>
+        <label htmlFor="google-check" className="google-sync__label"></label>
         <button className="google-sync__calendar">
           <span className="visually-hidden">Open calendar</span>
         </button>
