@@ -13,7 +13,7 @@ function TimeTracking() {
           <span className="visually-hidden">Options</span>
           <span className="time-tracking__round"></span>
         </button>
-        <div class="time-tracking__menu-wrapper">
+        <div className="time-tracking__menu-wrapper">
           <WorklogOptions />
         </div>
       </div>
