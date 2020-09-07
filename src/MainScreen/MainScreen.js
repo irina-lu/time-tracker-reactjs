@@ -1,7 +1,7 @@
 import React from "react";
 import "./MainScreen.scss";
 import MainScreenHeading from "./MainScreenHeading";
-import DaysList from "../DaysList/DaysList";
+import DaysList from "../Day/DaysList";
 
 function MainScreen() {
   return (

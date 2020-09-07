@@ -29,14 +29,19 @@
     cursor: pointer;
 }
 
-.time-tracking__menu {
+.time-tracking__menu-wrapper {
+    position: absolute;
     display: none;
     top: 40px;
     right: 63px;
+
+    &:hover {
+        display: block;
+    }
 }
 
-.time-tracking__options:hover~.time-tracking__menu,
-.time-tracking__options:focus~.time-tracking__menu {
+.time-tracking__options:hover~.time-tracking__menu-wrapper,
+.time-tracking__options:focus~.time-tracking__menu-wrapper {
     display: block;
 }
 
