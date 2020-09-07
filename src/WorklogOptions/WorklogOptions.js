@@ -3,7 +3,7 @@ import "./WorklogOptions.scss";
 
 function WorklogOptions() {
   return (
-    <ul className="worklog-options time-tracking__menu">
+    <ul className="worklog-options">
       <li className="worklog-options__item">
         <button className="worklog-options__btn">Jira link</button>
       </li>

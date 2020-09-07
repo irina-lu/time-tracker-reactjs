@@ -1,6 +1,6 @@
 import React from "react";
-import "./DaysList";
-import Day from "../Day/Day";
+import "./DaysList.scss";
+import Day from "./Day";
 
 function DaysList() {
   return (
