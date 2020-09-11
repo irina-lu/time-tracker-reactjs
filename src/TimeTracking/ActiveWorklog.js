@@ -1,13 +1,67 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import moment from "moment";
 import "./ActiveWorklog.scss";
 
-function ActiveWorklog() {
+function ActiveWorklog(props) {
+  const [sec, setSec] = useState(14395);
+  const [classButton, setClassButton] = useState(
+    "active-worklog__btn-pause_run"
+  );
+  const [isPaused, setPaused] = useState(false);
+  const [isStopped, setStopped] = useState(true);
+  const startTime = useRef(null);
+  const endTime = useRef(null);
+
+  useEffect(() => {
+    startTime.current = moment().format("hh:mm");
+    console.log(startTime.current);
+  }, []);
+
+  useEffect(() => {
+    if (!isPaused) {
+      const fourHours = 14400;
+      if (sec === fourHours) {
+        stopTimer();
+        return;
+      }
+      const interval = setInterval(() => {
+        setSec((sec) => sec + 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [isPaused, sec]);
+
+  const min = sec / 60;
+  const displaySec = (sec % 60).toString().padStart(2, "0");
+  const displayMin = Math.floor(min % 60)
+    .toString()
+    .padStart(2, "0");
+  const displayHour = Math.floor(min / 60);
+
+  function pauseTimer() {
+    if (classButton) {
+      setClassButton("");
+      setPaused(true);
+    } else {
+      setClassButton("active-worklog__btn-pause_run");
+      setPaused(false);
+    }
+  }
+
+  function stopTimer() {
+    setPaused(true);
+    setClassButton("");
+    endTime.current = moment().format("hh:mm");
+    console.log(endTime.current);
+    props.openPopup(isStopped);
+  }
+
   return (
     <div className="active-worklog">
       <p className="active-worklog__input-wrapper">
         <label
           className="active-worklog__label visually-hidden"
-          for="worklog-name"
+          htmlFor="worklog-name"
         >
           Add worklog name
         </label>
@@ -17,13 +71,13 @@ function ActiveWorklog() {
           id="worklog-name"
           name="worklog-name"
           placeholder="Add worklog name"
-          value="Meeting with QA"
+          defaultValue="Meeting with QA"
         />
       </p>
       <p className="active-worklog__input-wrapper">
         <label
           className="active-worklog__label visually-hidden "
-          for="issue-name"
+          htmlFor="issue-name"
         >
           Add issue
         </label>
@@ -35,12 +89,18 @@ function ActiveWorklog() {
           placeholder="Add issue"
         />
       </p>
-      <span className="active-worklog__timer">01:15:00</span>
+      <span className="active-worklog__timer">{`0${displayHour}:${displayMin}:${displaySec}`}</span>
       <div className="active-worklog__btn-wrapper">
-        <button className="active-worklog__btn active-worklog__btn-stop">
+        <button
+          className="active-worklog__btn active-worklog__btn-stop"
+          onClick={stopTimer}
+        >
           <span className="visually-hidden">Stop</span>
         </button>
-        <button className="active-worklog__btn active-worklog__btn-pause active-worklog__btn-pause_run">
+        <button
+          className={`active-worklog__btn active-worklog__btn-pause ${classButton}`}
+          onClick={pauseTimer}
+        >
           <span className="visually-hidden">Pause</span>
         </button>
       </div>
