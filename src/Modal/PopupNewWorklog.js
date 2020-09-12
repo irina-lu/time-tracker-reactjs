@@ -28,6 +28,7 @@ function PopupNewWorklog(props) {
               id="worklog"
               name="worklog"
               placeholder="Enter the worklog name"
+              defaultValue={props.nameWorklog}
             />
           </p>
           <p className="popup-new-worklog__input-wrapper">
@@ -39,6 +40,7 @@ function PopupNewWorklog(props) {
               id="issue"
               name="issue"
               placeholder="Enter the issue name"
+              defaultValue={props.nameIssue}
             />
           </p>
           <div className="popup-new-worklog__btn-wrapper">

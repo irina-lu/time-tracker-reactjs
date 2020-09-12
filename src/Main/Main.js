@@ -9,7 +9,10 @@ function Main(props) {
     <main className="page-main">
       <h1 className="visually-hidden">Time Tracker</h1>
       <MainScreen />
-      <TimeTracking openPopup={props.openPopup} />
+      <TimeTracking
+        openPopup={props.openPopup}
+        updateInfoWorklog={props.updateInfoWorklog}
+      />
       <GoogleSync />
     </main>
   );

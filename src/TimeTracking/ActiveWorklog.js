@@ -3,7 +3,7 @@ import moment from "moment";
 import "./ActiveWorklog.scss";
 
 function ActiveWorklog(props) {
-  const [sec, setSec] = useState(14395);
+  const [sec, setSec] = useState(0);
   const [classButton, setClassButton] = useState(
     "active-worklog__btn-pause_run"
   );
@@ -11,6 +11,8 @@ function ActiveWorklog(props) {
   const [isStopped, setStopped] = useState(true);
   const startTime = useRef(null);
   const endTime = useRef(null);
+  const [nameWorklog, setNameWorklog] = useState("");
+  const [nameIssue, setNameIssue] = useState("");
 
   useEffect(() => {
     startTime.current = moment().format("hh:mm");
@@ -54,6 +56,15 @@ function ActiveWorklog(props) {
     endTime.current = moment().format("hh:mm");
     console.log(endTime.current);
     props.openPopup(isStopped);
+    props.updateInfoWorklog(nameWorklog, nameIssue);
+  }
+
+  function hangleChangeWorklog(e) {
+    setNameWorklog(e.target.value);
+  }
+
+  function hangleChangeIssue(e) {
+    setNameIssue(e.target.value);
   }
 
   return (
@@ -71,7 +82,8 @@ function ActiveWorklog(props) {
           id="worklog-name"
           name="worklog-name"
           placeholder="Add worklog name"
-          defaultValue="Meeting with QA"
+          defaultValue={nameWorklog}
+          onChange={hangleChangeWorklog}
         />
       </p>
       <p className="active-worklog__input-wrapper">
@@ -87,6 +99,8 @@ function ActiveWorklog(props) {
           id="issue-name"
           name="issue-name"
           placeholder="Add issue"
+          defaultValue={nameIssue}
+          onChange={hangleChangeIssue}
         />
       </p>
       <span className="active-worklog__timer">{`0${displayHour}:${displayMin}:${displaySec}`}</span>
