@@ -3,20 +3,19 @@ import moment from "moment";
 import "./ActiveWorklog.scss";
 
 function ActiveWorklog(props) {
-  const [sec, setSec] = useState(0);
+  const [sec, setSec] = useState(9600);
   const [classButton, setClassButton] = useState(
     "active-worklog__btn-pause_run"
   );
   const [isPaused, setPaused] = useState(false);
   const [isStopped, setStopped] = useState(true);
-  const startTime = useRef(null);
-  const endTime = useRef(null);
+  let startTime = useRef("");
   const [nameWorklog, setNameWorklog] = useState("");
   const [nameIssue, setNameIssue] = useState("");
+  const today = new Date();
 
   useEffect(() => {
-    startTime.current = moment().format("hh:mm");
-    console.log(startTime.current);
+    startTime.current = `${today.getHours()}:${today.getMinutes()}`;
   }, []);
 
   useEffect(() => {
@@ -53,10 +52,24 @@ function ActiveWorklog(props) {
   function stopTimer() {
     setPaused(true);
     setClassButton("");
-    endTime.current = moment().format("hh:mm");
-    console.log(endTime.current);
+    debugger;
+    const endTime = calcEndTime();
+    console.log(endTime);
     props.openPopup(isStopped);
     props.updateInfoWorklog(nameWorklog, nameIssue);
+    props.getTime(startTime.current, endTime);
+  }
+
+  function calcEndTime() {
+    let arrTime = startTime.current.split(":");
+    let [hour, min] = arrTime;
+    hour = +hour + +displayHour;
+    min = +min + +displayMin;
+    if (min >= 60) {
+      hour += Math.floor(min / 60);
+      min %= 60;
+      return `${hour}:${min}`;
+    }
   }
 
   function hangleChangeWorklog(e) {

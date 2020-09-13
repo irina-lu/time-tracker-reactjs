@@ -8,6 +8,8 @@ function App() {
   const [isStoppedTimer, setStoppedTimer] = useState(false);
   const [nameWorklog, setNameWorklog] = useState("");
   const [nameIssue, setNameIssue] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
 
   function openPopup(isStoppedTimer) {
     setStoppedTimer(isStoppedTimer);
@@ -18,15 +20,26 @@ function App() {
     setNameIssue(nameIssue);
   }
 
+  function getTime(startTime, endTime) {
+    setStartTime(startTime);
+    setEndTime(endTime);
+  }
+
   return (
     <div className="time-tracker-app">
       <Header />
-      <Main openPopup={openPopup} updateInfoWorklog={updateInfoWorklog} />
+      <Main
+        openPopup={openPopup}
+        updateInfoWorklog={updateInfoWorklog}
+        getTime={getTime}
+      />
       {isStoppedTimer ? (
         <PopupNewWorklog
           openPopup={openPopup}
           nameWorklog={nameWorklog}
           nameIssue={nameIssue}
+          startTime={startTime}
+          endTime={endTime}
         />
       ) : null}
       {/* <Notification /> */}

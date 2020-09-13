@@ -12,6 +12,7 @@ function Main(props) {
       <TimeTracking
         openPopup={props.openPopup}
         updateInfoWorklog={props.updateInfoWorklog}
+        getTime={props.getTime}
       />
       <GoogleSync />
     </main>

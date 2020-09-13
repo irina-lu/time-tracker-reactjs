@@ -29,6 +29,7 @@ function TimeTracking(props) {
         <ActiveWorklog
           openPopup={props.openPopup}
           updateInfoWorklog={props.updateInfoWorklog}
+          getTime={props.getTime}
         />
       )}
       {/* <NewWorklog startTimer={startTimer} isVisible={isVisible} />

@@ -1,13 +1,12 @@
 import React from "react";
 import "./PopupNewWorklog.scss";
-import Slider from "./Slider";
+import Slider from "./Slider/Slider";
 
 function PopupNewWorklog(props) {
   const isClosed = false;
 
   function closePopup(e) {
     e.preventDefault();
-    console.log("click");
     props.openPopup(isClosed);
   }
 
@@ -17,7 +16,7 @@ function PopupNewWorklog(props) {
         <h2 className="popup-new-worklog__title">New worklog</h2>
         <form className="popup-new-worklog__form" method="POST">
           <div className="popup-new-worklog__slider">
-            <Slider />
+            <Slider startTime={props.startTime} endTime={props.endTime} />
           </div>
           <p className="popup-new-worklog__input-wrapper">
             <label className="popup-new-worklog__label" htmlFor="worklog">
