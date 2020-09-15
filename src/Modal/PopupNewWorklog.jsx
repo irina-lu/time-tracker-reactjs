@@ -1,13 +1,15 @@
 import React from "react";
 import "./PopupNewWorklog.scss";
 import Slider from "./Slider/Slider";
+import { connect } from "react-redux";
+import { openPopup } from "../redux/actions";
 
 function PopupNewWorklog(props) {
-  const isClosed = false;
+  // const isClosed = false;
 
   function closePopup(e) {
     e.preventDefault();
-    props.openPopup(isClosed);
+    props.openPopup();
   }
 
   return (
@@ -60,4 +62,12 @@ function PopupNewWorklog(props) {
   );
 }
 
-export default PopupNewWorklog;
+const mapStateToProps = (state) => {
+  return { isOpen: state.popup };
+};
+
+const mapDispachToProps = {
+  openPopup,
+};
+
+export default connect(mapStateToProps, mapDispachToProps)(PopupNewWorklog);

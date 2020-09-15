@@ -1,21 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
-import moment from "moment";
 import "./ActiveWorklog.scss";
+import { connect } from "react-redux";
+import { openPopup } from "../redux/actions";
 
 function ActiveWorklog(props) {
-  const [sec, setSec] = useState(0);
+  const [sec, setSec] = useState(2960);
   const [classButton, setClassButton] = useState(
     "active-worklog__btn-pause_run"
   );
   const [isPaused, setPaused] = useState(false);
-  const [isStopped, setStopped] = useState(true);
+  // const [isStopped, setStopped] = useState(true);
   let startTime = useRef("");
   const [nameWorklog, setNameWorklog] = useState("");
   const [nameIssue, setNameIssue] = useState("");
   const today = new Date();
 
   useEffect(() => {
-    startTime.current = `${today.getHours()}:${today.getMinutes()}`;
+    startTime.current = `${today
+      .getHours()
+      .toString()
+      .padStart(2, "0")}:${today.getMinutes()}`;
   }, []);
 
   useEffect(() => {
@@ -52,12 +56,10 @@ function ActiveWorklog(props) {
   function stopTimer() {
     setPaused(true);
     setClassButton("");
-    debugger;
     const endTime = calcEndTime();
-    // console.log(endTime);
-    props.openPopup(isStopped);
+    props.openPopup();
     props.updateInfoWorklog(nameWorklog, nameIssue);
-    props.getTime(startTime.current, endTime.padStart(2, "0"));
+    props.getTime(startTime.current, endTime);
   }
 
   function calcEndTime() {
@@ -66,12 +68,10 @@ function ActiveWorklog(props) {
     hour = +hour + +displayHour;
     min = +min + +displayMin;
     if (min >= 60) {
-      hour += Math.floor(min / 60)
-        .toString()
-        .padStart(2, "0");
+      hour += Math.floor(min / 60);
       min %= 60;
     }
-    return `${hour}:${min}`;
+    return `${hour.toString().padStart(2, "0")}:${min}`;
   }
 
   function hangleChangeWorklog(e) {
@@ -137,4 +137,12 @@ function ActiveWorklog(props) {
   );
 }
 
-export default ActiveWorklog;
+const mapStateToProps = (state) => {
+  return { isStopped: state.popup };
+};
+
+const mapDispachToProps = {
+  openPopup,
+};
+
+export default connect(mapStateToProps, mapDispachToProps)(ActiveWorklog);
