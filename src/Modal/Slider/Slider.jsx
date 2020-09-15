@@ -8,7 +8,8 @@ function Slide({ startTime, endTime }) {
   const sevenPM = 1140;
 
   function minuteToHour(value) {
-    debugger;
+    // debugger;
+
     let hours = Math.floor(value / 60)
       .toString()
       .padStart(2, "0");
@@ -18,10 +19,10 @@ function Slide({ startTime, endTime }) {
 
   console.log(startTime, endTime);
 
-  if (startTime === endTime) {
-    today.setMinutes(today.getMinutes() + 1);
-    endTime = `${today.getHours()}:${today.getMinutes()}`;
-  }
+  // if (startTime === endTime) {
+  //   today.setMinutes(today.getMinutes() + 1);
+  //   endTime = `${today.getHours()}:${today.getMinutes()}`;
+  // }
 
   function timeToMinute(time) {
     let minute = +time.slice(3);
@@ -89,7 +90,7 @@ export function Handle({
       style={{
         left: `${percent}%`,
         position: "absolute",
-        marginLeft: -15,
+        marginLeft: -10,
         marginTop: -3,
         zIndex: 2,
         cursor: "pointer",
@@ -109,7 +110,11 @@ export function Handle({
   );
 }
 
-function Track({ source, target, getTrackProps }) {
+function Track({ source, target, getTrackProps, valueStart, valueEnd }) {
+  valueStart = source.value;
+  valueEnd = target.value;
+  console.log(`start: ${valueStart}; end: ${valueEnd}`);
+
   return (
     <div
       style={{

@@ -3,7 +3,7 @@ import moment from "moment";
 import "./ActiveWorklog.scss";
 
 function ActiveWorklog(props) {
-  const [sec, setSec] = useState(9600);
+  const [sec, setSec] = useState(0);
   const [classButton, setClassButton] = useState(
     "active-worklog__btn-pause_run"
   );
@@ -54,10 +54,10 @@ function ActiveWorklog(props) {
     setClassButton("");
     debugger;
     const endTime = calcEndTime();
-    console.log(endTime);
+    // console.log(endTime);
     props.openPopup(isStopped);
     props.updateInfoWorklog(nameWorklog, nameIssue);
-    props.getTime(startTime.current, endTime);
+    props.getTime(startTime.current, endTime.padStart(2, "0"));
   }
 
   function calcEndTime() {
@@ -66,10 +66,12 @@ function ActiveWorklog(props) {
     hour = +hour + +displayHour;
     min = +min + +displayMin;
     if (min >= 60) {
-      hour += Math.floor(min / 60);
+      hour += Math.floor(min / 60)
+        .toString()
+        .padStart(2, "0");
       min %= 60;
-      return `${hour}:${min}`;
     }
+    return `${hour}:${min}`;
   }
 
   function hangleChangeWorklog(e) {
