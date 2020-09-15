@@ -3,17 +3,13 @@ import Header from "./Header/Header";
 import Main from "./Main/Main";
 import PopupNewWorklog from "./Modal/PopupNewWorklog";
 import Notification from "./Modal/Notification";
+import { connect } from "react-redux";
 
-function App() {
-  const [isStoppedTimer, setStoppedTimer] = useState(false);
+function App(props) {
   const [nameWorklog, setNameWorklog] = useState("");
   const [nameIssue, setNameIssue] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-
-  function openPopup(isStoppedTimer) {
-    setStoppedTimer(isStoppedTimer);
-  }
 
   function updateInfoWorklog(nameWorklog, nameIssue) {
     setNameWorklog(nameWorklog);
@@ -28,14 +24,9 @@ function App() {
   return (
     <div className="time-tracker-app">
       <Header />
-      <Main
-        openPopup={openPopup}
-        updateInfoWorklog={updateInfoWorklog}
-        getTime={getTime}
-      />
-      {isStoppedTimer ? (
+      <Main updateInfoWorklog={updateInfoWorklog} getTime={getTime} />
+      {props.isStoppedTimer ? (
         <PopupNewWorklog
-          openPopup={openPopup}
           nameWorklog={nameWorklog}
           nameIssue={nameIssue}
           startTime={startTime}
@@ -47,4 +38,8 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return { isStoppedTimer: state.popup };
+};
+
+export default connect(mapStateToProps, null)(App);

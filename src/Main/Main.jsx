@@ -10,7 +10,6 @@ function Main(props) {
       <h1 className="visually-hidden">Time Tracker</h1>
       <MainScreen />
       <TimeTracking
-        openPopup={props.openPopup}
         updateInfoWorklog={props.updateInfoWorklog}
         getTime={props.getTime}
       />

@@ -3,14 +3,9 @@ import "./TimeTracking.scss";
 import WorklogOptions from "../WorklogOptions/WorklogOptions";
 import NewWorklog from "./NewWorklog";
 import ActiveWorklog from "./ActiveWorklog";
+import { connect } from "react-redux";
 
 function TimeTracking(props) {
-  const [isVisible, setVisible] = useState(true);
-
-  function openTimer() {
-    setVisible(!isVisible);
-  }
-
   return (
     <section className="time-tracking">
       <div className="time-tracking__title-wrapper">
@@ -23,20 +18,22 @@ function TimeTracking(props) {
           <WorklogOptions />
         </div>
       </div>
-      {isVisible ? (
-        <NewWorklog openTimer={openTimer} />
-      ) : (
+      {props.isStartTamer ? (
         <ActiveWorklog
-          openPopup={props.openPopup}
           updateInfoWorklog={props.updateInfoWorklog}
           getTime={props.getTime}
         />
+      ) : (
+        <NewWorklog />
       )}
-      {/* <NewWorklog startTimer={startTimer} isVisible={isVisible} />
-
-      <ActiveWorklog isVisible={isVisible} /> */}
     </section>
   );
 }
 
-export default TimeTracking;
+const mapStateToProps = (state) => {
+  return {
+    isStartTamer: state.timer,
+  };
+};
+
+export default connect(mapStateToProps, null)(TimeTracking);
