@@ -1,7 +1,7 @@
 import { CREATE_WORKLOG } from "./types";
 
 const initialState = {
-  worklog: [{}],
+  worklog: [{ name: "", issue: "", started: "", stoped: "", status: "" }],
 };
 
 export const worklogReducer = (state = initialState, action) => {

@@ -9,13 +9,12 @@ function ActiveWorklog(props) {
     "active-worklog__btn-pause_run"
   );
   const [isPaused, setPaused] = useState(false);
-  // const [isStopped, setStopped] = useState(true);
   let startTime = useRef("");
   const [nameWorklog, setNameWorklog] = useState("");
   const [nameIssue, setNameIssue] = useState("");
-  const today = new Date();
 
   useEffect(() => {
+    const today = new Date();
     startTime.current = `${today
       .getHours()
       .toString()
