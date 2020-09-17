@@ -1,4 +1,4 @@
-import { OPEN_POPUP, START_TIMER } from "./types";
+import { CREATE_WORKLOG, OPEN_POPUP, START_TIMER } from "./types";
 
 export function openPopup() {
   return {
@@ -9,5 +9,12 @@ export function openPopup() {
 export function startTimer() {
   return {
     type: START_TIMER,
+  };
+}
+
+export function createWorklog(worklog) {
+  return {
+    type: CREATE_WORKLOG,
+    payload: worklog,
   };
 }

@@ -1,23 +1,41 @@
 import React from "react";
+import { connect } from "react-redux";
 import "./Worklog.scss";
 import WorklogOptions from "../WorklogOptions/WorklogOptions";
 
-function Worklog() {
+function Worklog({ worklog }) {
+  function minuteToHour(value) {
+    let hours = Math.floor(value / 60)
+      .toString()
+      .padStart(2, "0");
+    let minutes = (value - hours * 60).toString().padStart(2, "0");
+    return `${hours}:${minutes}`;
+  }
+
+  const time = worklog.ended - worklog.started;
+
+  // minuteToHour(worklog.started);
+  // minuteToHour(worklog.ended);
+
   return (
     <li className="worklog__wrapper">
       <div className="worklog">
         <p className="worklog__interval-time">
-          09:00 <span className="worklog__interval-time_gray">— 10:00</span>
+          {minuteToHour(worklog.started)}
+          <span className="worklog__interval-time_gray">
+            {" "}
+            — {minuteToHour(worklog.ended)}
+          </span>
         </p>
         <span className="worklog__status"></span>
         <div className="worklog__name-wrapper">
-          <span className="worklog__code-issue">JRM-310</span>
-          <h4 className="worklog__name">Team standup</h4>
+          <span className="worklog__code-issue">{worklog.issue}</span>
+          <h4 className="worklog__name">{worklog.name}</h4>
         </div>
-        <div className="worklog__bar">
+        {/* <div className="worklog__bar">
           <div className="worklog__value"></div>
-        </div>
-        <span className="worklog__time">01:00:00</span>
+        </div> */}
+        <span className="worklog__time">{`${minuteToHour(time)}:00`}</span>
         <button className="worklog__btn">
           <span className="visually-hidden">Play</span>
         </button>
@@ -108,4 +126,10 @@ function Worklog() {
   );
 }
 
-export default Worklog;
+const mapStateToProps = (state) => {
+  return {
+    worklogs: state.worklogs,
+  };
+};
+
+export default connect(mapStateToProps, null)(Worklog);

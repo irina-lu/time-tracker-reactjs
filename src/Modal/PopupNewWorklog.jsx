@@ -4,6 +4,7 @@ import Slider from "./Slider/Slider";
 import { connect } from "react-redux";
 import { openPopup } from "../redux/actions";
 import { startTimer } from "../redux/actions";
+import { createWorklog } from "../redux/actions";
 
 function PopupNewWorklog(props) {
   const [nameWorklog, setNameWorklog] = useState(props.nameWorklog);
@@ -30,8 +31,10 @@ function PopupNewWorklog(props) {
       issue: nameIssue,
       started: start,
       ended: end,
+      status: "",
     };
 
+    props.createWorklog(newWorklog);
     console.log(newWorklog);
   }
 
@@ -104,12 +107,17 @@ function PopupNewWorklog(props) {
 }
 
 const mapStateToProps = (state) => {
-  return { isOpen: state.popup, isStartTimer: state.timer };
+  return {
+    isOpen: state.popup,
+    isStartTimer: state.timer,
+    worklogs: state.worklogs,
+  };
 };
 
 const mapDispachToProps = {
   openPopup,
   startTimer,
+  createWorklog,
 };
 
 export default connect(mapStateToProps, mapDispachToProps)(PopupNewWorklog);

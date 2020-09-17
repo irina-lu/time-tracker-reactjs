@@ -17,8 +17,6 @@ function Slide({ startTime, endTime, update }) {
     return `${hours}:${minutes}`;
   }
 
-  console.log(startTime, endTime);
-
   // if (startTime === endTime) {
   //   today.setMinutes(today.getMinutes() + 1);
   //   endTime = `${today.getHours()}:${today.getMinutes()}`;
