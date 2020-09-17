@@ -6,5 +6,5 @@ import { worklogReducer } from "./worklogReducer";
 export const rootReducer = combineReducers({
   popup: openPopupReducer,
   timer: startTimerReducer,
-  worklog: worklogReducer,
+  worklogs: worklogReducer,
 });

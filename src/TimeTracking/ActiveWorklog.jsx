@@ -4,18 +4,17 @@ import { connect } from "react-redux";
 import { openPopup } from "../redux/actions";
 
 function ActiveWorklog(props) {
-  const [sec, setSec] = useState(2960);
+  const [sec, setSec] = useState(0);
   const [classButton, setClassButton] = useState(
     "active-worklog__btn-pause_run"
   );
   const [isPaused, setPaused] = useState(false);
-  // const [isStopped, setStopped] = useState(true);
   let startTime = useRef("");
   const [nameWorklog, setNameWorklog] = useState("");
   const [nameIssue, setNameIssue] = useState("");
-  const today = new Date();
 
   useEffect(() => {
+    const today = new Date();
     startTime.current = `${today
       .getHours()
       .toString()

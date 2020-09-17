@@ -1,23 +1,21 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import { useEffect } from "react";
 import { Slider, Rail, Handles, Tracks } from "react-compound-slider";
 import "./Slider.scss";
 
-function Slide({ startTime, endTime }) {
-  const today = new Date();
+function Slide({ startTime, endTime, update }) {
+  let valueStart = useRef();
+  let valueEnd = useRef();
   const sevenAM = 420;
   const sevenPM = 1140;
 
   function minuteToHour(value) {
-    // debugger;
-
     let hours = Math.floor(value / 60)
       .toString()
       .padStart(2, "0");
     let minutes = (value - hours * 60).toString().padStart(2, "0");
     return `${hours}:${minutes}`;
   }
-
-  console.log(startTime, endTime);
 
   // if (startTime === endTime) {
   //   today.setMinutes(today.getMinutes() + 1);
@@ -71,6 +69,9 @@ function Slide({ startTime, endTime }) {
                 source={source}
                 target={target}
                 getTrackProps={getTrackProps}
+                valueStart={valueStart}
+                valueEnd={valueEnd}
+                update={update}
               />
             ))}
           </div>
@@ -110,10 +111,20 @@ export function Handle({
   );
 }
 
-function Track({ source, target, getTrackProps, valueStart, valueEnd }) {
-  valueStart = source.value;
-  valueEnd = target.value;
-  console.log(`start: ${valueStart}; end: ${valueEnd}`);
+function Track({
+  source,
+  target,
+  getTrackProps,
+  valueStart,
+  valueEnd,
+  update,
+}) {
+  useEffect(() => {
+    valueStart.current = source.value;
+    valueEnd.current = target.value;
+    update(valueStart.current, valueEnd.current);
+    console.log(`start: ${valueStart.current}; end: ${valueEnd.current}`);
+  });
 
   return (
     <div
@@ -129,9 +140,7 @@ function Track({ source, target, getTrackProps, valueStart, valueEnd }) {
         backgroundColor: "#FFCC40",
         boxShadow: "0px 15px 30px rgba(216, 226, 232, 0.12)",
       }}
-      {
-        ...getTrackProps() /* this will set up events if you want it to be clickeable (optional) */
-      }
+      {...getTrackProps()}
     />
   );
 }
