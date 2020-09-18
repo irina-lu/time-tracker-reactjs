@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { openPopup } from "../redux/actions";
 
 function ActiveWorklog(props) {
-  const [sec, setSec] = useState(0);
+  const [sec, setSec] = useState(3600);
   const [classButton, setClassButton] = useState(
     "active-worklog__btn-pause_run"
   );

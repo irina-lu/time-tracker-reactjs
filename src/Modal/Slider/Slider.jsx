@@ -28,10 +28,10 @@ function Slide({ startTime, endTime, update }) {
   }
 
   let startTimeMin = timeToMinute(startTime);
-  console.log(startTimeMin);
+  // console.log(startTimeMin);
 
   let endTimeMin = timeToMinute(endTime);
-  console.log(endTimeMin);
+  // console.log(endTimeMin);
 
   return (
     <Slider
@@ -123,7 +123,7 @@ function Track({
     valueStart.current = source.value;
     valueEnd.current = target.value;
     update(valueStart.current, valueEnd.current);
-    console.log(`start: ${valueStart.current}; end: ${valueEnd.current}`);
+    // console.log(`start: ${valueStart.current}; end: ${valueEnd.current}`);
   });
 
   return (

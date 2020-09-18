@@ -1,4 +1,9 @@
-import { CREATE_WORKLOG, OPEN_POPUP, START_TIMER } from "./types";
+import {
+  CREATE_WORKLOG,
+  OPEN_POPUP,
+  START_TIMER,
+  VALIDATE_FIELD,
+} from "./types";
 
 export function openPopup() {
   return {
