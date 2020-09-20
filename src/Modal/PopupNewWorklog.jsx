@@ -5,10 +5,12 @@ import { connect } from "react-redux";
 import { openPopup } from "../redux/actions";
 import { startTimer } from "../redux/actions";
 import { createWorklog } from "../redux/actions";
+import { openNotification } from "../redux/actions";
 
 function PopupNewWorklog(props) {
   const [nameWorklog, setNameWorklog] = useState(props.nameWorklog);
   const [nameIssue, setNameIssue] = useState(props.nameIssue);
+  const [nameError, setNameError] = useState("");
 
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(0);
@@ -20,9 +22,47 @@ function PopupNewWorklog(props) {
 
   function submitHandler(e) {
     e.preventDefault();
-    createNewWorklog();
-    props.startTimer();
-    props.openPopup();
+    const isValid = validate();
+    if (start === end) {
+      const warningStatus = {
+        status: "warning",
+        message: "You can't track less than minute.",
+      };
+      props.openNotification(warningStatus);
+      props.handleClick();
+    } else if (!isValid) {
+      const status = {
+        status: "warning",
+        message: "Please, enter the worklog name.",
+      };
+      props.openNotification(status);
+      props.handleClick();
+    } else {
+      setNameError("");
+      createNewWorklog();
+      props.handleClose();
+      props.openNotification({});
+      props.startTimer();
+      props.openPopup();
+    }
+  }
+
+  function validate() {
+    let nameError = "";
+
+    if (!nameWorklog) {
+      nameError = "Please, enter worklog name";
+    } else {
+      nameError = "";
+      setNameError(nameError);
+    }
+
+    if (nameError) {
+      setNameError(nameError);
+      return false;
+    }
+
+    return true;
   }
 
   function createNewWorklog() {
@@ -33,13 +73,12 @@ function PopupNewWorklog(props) {
       ended: end,
       status: "",
     };
-
     props.createWorklog(newWorklog);
-    console.log(newWorklog);
   }
 
   function hangleChangeWorklog(e) {
     setNameWorklog(e.target.value);
+    validate();
   }
 
   function hangleChangeIssue(e) {
@@ -64,7 +103,7 @@ function PopupNewWorklog(props) {
           </div>
           <p className="popup-new-worklog__input-wrapper">
             <label className="popup-new-worklog__label" htmlFor="worklog">
-              Worklog name
+              Worklog name *
             </label>
             <input
               className="popup-new-worklog__input"
@@ -74,7 +113,9 @@ function PopupNewWorklog(props) {
               defaultValue={nameWorklog}
               onChange={hangleChangeWorklog}
             />
+            <span className="form-error">{nameError}</span>
           </p>
+
           <p className="popup-new-worklog__input-wrapper">
             <label className="popup-new-worklog__label" htmlFor="issue">
               Issue
@@ -111,6 +152,7 @@ const mapStateToProps = (state) => {
     isOpen: state.popup,
     isStartTimer: state.timer,
     worklogs: state.worklogs,
+    statusNotification: state.notification,
   };
 };
 
@@ -118,6 +160,7 @@ const mapDispachToProps = {
   openPopup,
   startTimer,
   createWorklog,
+  openNotification,
 };
 
 export default connect(mapStateToProps, mapDispachToProps)(PopupNewWorklog);
