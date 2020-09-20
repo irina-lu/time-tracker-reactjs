@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { openPopup } from "../redux/actions";
 import { startTimer } from "../redux/actions";
 import { createWorklog } from "../redux/actions";
+import { openNotification } from "../redux/actions";
 
 function PopupNewWorklog(props) {
   const [nameWorklog, setNameWorklog] = useState(props.nameWorklog);
@@ -22,10 +23,25 @@ function PopupNewWorklog(props) {
   function submitHandler(e) {
     e.preventDefault();
     const isValid = validate();
-
-    if (isValid) {
+    if (start === end) {
+      const warningStatus = {
+        status: "warning",
+        message: "You can't track less than minute.",
+      };
+      props.openNotification(warningStatus);
+      props.handleClick();
+    } else if (!isValid) {
+      const status = {
+        status: "warning",
+        message: "Please, enter the worklog name.",
+      };
+      props.openNotification(status);
+      props.handleClick();
+    } else {
       setNameError("");
       createNewWorklog();
+      props.handleClose();
+      props.openNotification({});
       props.startTimer();
       props.openPopup();
     }
@@ -98,7 +114,6 @@ function PopupNewWorklog(props) {
               onChange={hangleChangeWorklog}
             />
             <span className="form-error">{nameError}</span>
-            {/* <FormError /> */}
           </p>
 
           <p className="popup-new-worklog__input-wrapper">
@@ -137,6 +152,7 @@ const mapStateToProps = (state) => {
     isOpen: state.popup,
     isStartTimer: state.timer,
     worklogs: state.worklogs,
+    statusNotification: state.notification,
   };
 };
 
@@ -144,6 +160,7 @@ const mapDispachToProps = {
   openPopup,
   startTimer,
   createWorklog,
+  openNotification,
 };
 
 export default connect(mapStateToProps, mapDispachToProps)(PopupNewWorklog);

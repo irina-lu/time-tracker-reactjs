@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import Header from "./Header/Header";
 import Main from "./Main/Main";
 import PopupNewWorklog from "./Modal/PopupNewWorklog";
@@ -11,6 +12,8 @@ function App(props) {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
 
+  const [open, setOpen] = React.useState(false);
+
   function updateInfoWorklog(nameWorklog, nameIssue) {
     setNameWorklog(nameWorklog);
     setNameIssue(nameIssue);
@@ -20,6 +23,17 @@ function App(props) {
     setStartTime(startTime);
     setEndTime(endTime);
   }
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   return (
     <div className="time-tracker-app">
@@ -31,9 +45,11 @@ function App(props) {
           nameIssue={nameIssue}
           startTime={startTime}
           endTime={endTime}
+          handleClick={handleClick}
+          handleClose={handleClose}
         />
       ) : null}
-      {/* <Notification /> */}
+      <Notification open={open} handleClose={handleClose} />
     </div>
   );
 }

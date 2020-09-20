@@ -1,8 +1,8 @@
 import {
   CREATE_WORKLOG,
+  OPEN_NOTIFICATION,
   OPEN_POPUP,
   START_TIMER,
-  VALIDATE_FIELD,
 } from "./types";
 
 export function openPopup() {
@@ -21,5 +21,12 @@ export function createWorklog(worklog) {
   return {
     type: CREATE_WORKLOG,
     payload: worklog,
+  };
+}
+
+export function openNotification(status) {
+  return {
+    type: OPEN_NOTIFICATION,
+    payload: status,
   };
 }
