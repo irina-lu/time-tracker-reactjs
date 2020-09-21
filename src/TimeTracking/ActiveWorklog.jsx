@@ -73,11 +73,11 @@ function ActiveWorklog(props) {
     return `${hour.toString().padStart(2, "0")}:${min}`;
   }
 
-  function hangleChangeWorklog(e) {
+  function handleChangeWorklog(e) {
     setNameWorklog(e.target.value);
   }
 
-  function hangleChangeIssue(e) {
+  function handleChangeIssue(e) {
     setNameIssue(e.target.value);
   }
 
@@ -97,7 +97,8 @@ function ActiveWorklog(props) {
           name="worklog-name"
           placeholder="Add worklog name"
           defaultValue={nameWorklog}
-          onChange={hangleChangeWorklog}
+          onChange={handleChangeWorklog}
+          autoComplete="off"
         />
       </p>
       <p className="active-worklog__input-wrapper">
@@ -114,7 +115,8 @@ function ActiveWorklog(props) {
           name="issue-name"
           placeholder="Add issue"
           defaultValue={nameIssue}
-          onChange={hangleChangeIssue}
+          onChange={handleChangeIssue}
+          autoComplete="off"
         />
       </p>
       <span className="active-worklog__timer">{`0${displayHour}:${displayMin}:${displaySec}`}</span>

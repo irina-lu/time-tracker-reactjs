@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Snackbar from "@material-ui/core/Snackbar";
 import "./Notification.scss";
 import { connect } from "react-redux";

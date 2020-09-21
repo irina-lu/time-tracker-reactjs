@@ -74,11 +74,17 @@
 }
 
 .worklog__code-issue {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 26px;
     height: 26px;
     color: $font-mid-gray;
     margin-bottom: 2px;
+    border: none;
+    background-color: transparent;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .worklog__name {
@@ -87,6 +93,13 @@
     font-size: 19px;
     line-height: 29px;
     font-weight: 600;
+    border: none;
+    background-color: transparent;
+    width: 300px;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 .worklog__bar {
@@ -202,6 +215,7 @@
 }
 
 .worklog__menu-wrapper {
+    z-index: 1;
     position: absolute;
     display: none;
     top: 93px;

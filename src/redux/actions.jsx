@@ -3,6 +3,8 @@ import {
   OPEN_NOTIFICATION,
   OPEN_POPUP,
   START_TIMER,
+  CHANGE_NAME,
+  CHANGE_ISSUE,
 } from "./types";
 
 export function openPopup() {
@@ -21,6 +23,20 @@ export function createWorklog(worklog) {
   return {
     type: CREATE_WORKLOG,
     payload: worklog,
+  };
+}
+
+export function changeName(name) {
+  return {
+    type: CHANGE_NAME,
+    payload: name,
+  };
+}
+
+export function changeIssue(issue) {
+  return {
+    type: CHANGE_ISSUE,
+    payload: issue,
   };
 }
 

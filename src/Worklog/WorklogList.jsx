@@ -24,7 +24,7 @@ function WorklogList({ worklogs }) {
   return (
     <ul className="worklogs-list">
       {worklogs.map((worklog, index) => (
-        <Worklog worklog={worklog} key={index} />
+        <Worklog worklog={worklog} key={index} index={index} />
       ))}
     </ul>
   );

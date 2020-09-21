@@ -1,4 +1,4 @@
-import { CREATE_WORKLOG } from "./types";
+import { CREATE_WORKLOG, CHANGE_NAME, CHANGE_ISSUE } from "./types";
 
 const initialState = [
   {
@@ -14,6 +14,27 @@ export const worklogReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_WORKLOG:
       return [...state, action.payload];
+    case CHANGE_NAME:
+      return state.map((worklog, index) => {
+        if (index === action.payload.id) {
+          return {
+            ...worklog,
+            name: action.payload.name,
+          };
+        }
+        return worklog;
+      });
+    case CHANGE_ISSUE:
+      return state.map((worklog, index) => {
+        debugger;
+        if (index === action.payload.id) {
+          return {
+            ...worklog,
+            issue: action.payload.issue,
+          };
+        }
+        return worklog;
+      });
     default:
       return state;
   }
