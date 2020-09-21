@@ -26,7 +26,6 @@ export const worklogReducer = (state = initialState, action) => {
       });
     case CHANGE_ISSUE:
       return state.map((worklog, index) => {
-        debugger;
         if (index === action.payload.id) {
           return {
             ...worklog,

@@ -5,6 +5,7 @@ import {
   START_TIMER,
   CHANGE_NAME,
   CHANGE_ISSUE,
+  CREATE_DAY,
 } from "./types";
 
 export function openPopup() {
@@ -44,5 +45,12 @@ export function openNotification(status) {
   return {
     type: OPEN_NOTIFICATION,
     payload: status,
+  };
+}
+
+export function createDay(key) {
+  return {
+    type: CREATE_DAY,
+    key,
   };
 }
