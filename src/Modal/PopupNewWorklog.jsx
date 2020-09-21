@@ -20,6 +20,7 @@ function PopupNewWorklog(props) {
     setEnd(end);
   }
 
+  //TODO
   function submitHandler(e) {
     e.preventDefault();
     const isValid = validate();
@@ -76,12 +77,11 @@ function PopupNewWorklog(props) {
     props.createWorklog(newWorklog);
   }
 
-  function hangleChangeWorklog(e) {
+  function handleChangeWorklog(e) {
     setNameWorklog(e.target.value);
-    validate();
   }
 
-  function hangleChangeIssue(e) {
+  function handleChangeIssue(e) {
     setNameIssue(e.target.value);
   }
 
@@ -111,7 +111,8 @@ function PopupNewWorklog(props) {
               name="worklog"
               placeholder="Enter the worklog name"
               defaultValue={nameWorklog}
-              onChange={hangleChangeWorklog}
+              onChange={handleChangeWorklog}
+              autoComplete="off"
             />
             <span className="form-error">{nameError}</span>
           </p>
@@ -126,7 +127,8 @@ function PopupNewWorklog(props) {
               name="issue"
               placeholder="Enter the issue name"
               defaultValue={nameIssue}
-              onChange={hangleChangeIssue}
+              onChange={handleChangeIssue}
+              autoComplete="off"
             />
           </p>
           <div className="popup-new-worklog__btn-wrapper">

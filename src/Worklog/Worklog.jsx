@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
+import { changeName } from "../redux/actions";
+import { changeIssue } from "../redux/actions";
 import "./Worklog.scss";
 import WorklogOptions from "../WorklogOptions/WorklogOptions";
 
-function Worklog({ worklog }) {
+function Worklog({ worklog, index, changeName, changeIssue }) {
+  const [nameWorklog, setNameWorklog] = useState(worklog.name);
+  const [nameIssue, setNameIssue] = useState(worklog.issue);
+
+  console.log(index);
+
+  function handleChangeWorklog(e) {
+    let name = e.target.value;
+    setNameWorklog(e.target.value);
+    changeWorklogName(name);
+  }
+
+  function changeWorklogName(name) {
+    const newName = {
+      id: index,
+      name: name,
+    };
+    changeName(newName);
+  }
+
+  function handleChangeIssue(e) {
+    debugger;
+    let issue = e.target.value;
+    setNameIssue(e.target.value);
+    changeWorklogIssue(issue);
+  }
+
+  function changeWorklogIssue(issue) {
+    const newIssue = {
+      id: index,
+      issue: issue,
+    };
+    changeIssue(newIssue);
+  }
+
   function minuteToHour(value) {
     let hours = Math.floor(value / 60)
       .toString()
@@ -13,9 +49,6 @@ function Worklog({ worklog }) {
   }
 
   const time = worklog.ended - worklog.started;
-
-  // minuteToHour(worklog.started);
-  // minuteToHour(worklog.ended);
 
   return (
     <li className="worklog__wrapper">
@@ -29,12 +62,23 @@ function Worklog({ worklog }) {
         </p>
         <span className="worklog__status"></span>
         <div className="worklog__name-wrapper">
-          <span className="worklog__code-issue">{worklog.issue}</span>
-          <h4 className="worklog__name">{worklog.name}</h4>
+          <input
+            className="worklog__code-issue"
+            name="issue-name"
+            defaultValue={nameIssue}
+            onChange={handleChangeIssue}
+            autoComplete="off"
+          />
+          {/* <span className="worklog__code-issue">{worklog.issue}</span> */}
+          <input
+            className="worklog__name"
+            name="worklog-name"
+            defaultValue={nameWorklog}
+            onChange={handleChangeWorklog}
+            autoComplete="off"
+          />
+          {/* <h4 className="worklog__name">{worklog.name}</h4> */}
         </div>
-        {/* <div className="worklog__bar">
-          <div className="worklog__value"></div>
-        </div> */}
         <span className="worklog__time">{`${minuteToHour(time)}:00`}</span>
         <button className="worklog__btn">
           <span className="visually-hidden">Play</span>
@@ -49,80 +93,6 @@ function Worklog({ worklog }) {
         <WorklogOptions />
       </div>
     </li>
-    // <li className="day__worklog-item-wrapper">
-    //   <div className="day__worklog-item">
-    //     <p className="day__interval-time">
-    //       10:00 <span className="day__interval-time_gray">— 11:15</span>
-    //     </p>
-    //     <div className="day__worklog-name-wrapper day__worklog-name-wrapper_full">
-    //       <span className="day__code">JRM-310</span>
-    //       <h4 className="day__worklog-name">Meeting with QA</h4>
-    //     </div>
-    //     <div className="day__worklog-bar">
-    //       <div className="day__worklog-value day__worklog-value_full"></div>
-    //     </div>
-    //     <span className="day__worklog-time">01:15:00</span>
-    //     <button className="day__btn">
-    //       <span className="visually-hidden">Play</span>
-    //     </button>
-    //   </div>
-    //   <div className="day__on-hover">
-    //     <button className="day__options-btn">
-    //       <span className="day__btn-round"></span>
-    //     </button>
-    //   </div>
-    //   <ul className="worklog-options day__worklog-menu">
-    //     <li className="worklog-options__item">
-    //       <button className="worklog-options__btn">Jira link</button>
-    //     </li>
-    //     <li className="worklog-options__item">
-    //       <button className="worklog-options__btn">Duplicate</button>
-    //     </li>
-    //     <li className="worklog-options__item">
-    //       <button className="worklog-options__btn">Add to favorite</button>
-    //     </li>
-    //     <li className="worklog-options__item">
-    //       <button className="worklog-options__btn">Delete</button>
-    //     </li>
-    //   </ul>
-    // </li>
-    // <li className="day__worklog-item-wrapper">
-    //   <div className="day__worklog-item">
-    //     <div className="day__interval-time-btn">
-    //       <span className="day__amount">2</span>
-    //     </div>
-    //     <div className="day__worklog-name-wrapper day__worklog-name-wrapper_in-progress">
-    //       <span className="day__code">JRM-310</span>
-    //       <h4 className="day__worklog-name">Company branding</h4>
-    //     </div>
-    //     <div className="day__worklog-bar">
-    //       <div className="day__worklog-value day__worklog-value_in-progress"></div>
-    //     </div>
-    //     <span className="day__worklog-time">03:50:00</span>
-    //     <button className="day__btn">
-    //       <span className="visually-hidden">Play</span>
-    //     </button>
-    //   </div>
-    //   <div className="day__on-hover">
-    //     <button className="day__options-btn">
-    //       <span className="day__btn-round"></span>
-    //     </button>
-    //   </div>
-    //   <ul className="worklog-options day__worklog-menu">
-    //     <li className="worklog-options__item">
-    //       <button className="worklog-options__btn">Jira link</button>
-    //     </li>
-    //     <li className="worklog-options__item">
-    //       <button className="worklog-options__btn">Duplicate</button>
-    //     </li>
-    //     <li className="worklog-options__item">
-    //       <button className="worklog-options__btn">Add to favorite</button>
-    //     </li>
-    //     <li className="worklog-options__item">
-    //       <button className="worklog-options__btn">Delete</button>
-    //     </li>
-    //   </ul>
-    // </li>
   );
 }
 
@@ -132,4 +102,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Worklog);
+const mapDispatchToProps = {
+  changeName,
+  changeIssue,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Worklog);
