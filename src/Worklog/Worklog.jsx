@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 import { changeName } from "../redux/actions";
 import { changeIssue } from "../redux/actions";
 import "./Worklog.scss";
@@ -8,6 +9,8 @@ import WorklogOptions from "../WorklogOptions/WorklogOptions";
 function Worklog({ worklog, index, changeName, changeIssue }) {
   const [nameWorklog, setNameWorklog] = useState(worklog.name);
   const [nameIssue, setNameIssue] = useState(worklog.issue);
+
+  const today = moment().format("YYYY-MM-DD");
 
   console.log(index);
 
@@ -22,7 +25,7 @@ function Worklog({ worklog, index, changeName, changeIssue }) {
       id: index,
       name: name,
     };
-    changeName(newName);
+    changeName(newName, today);
   }
 
   function handleChangeIssue(e) {
@@ -37,7 +40,7 @@ function Worklog({ worklog, index, changeName, changeIssue }) {
       id: index,
       issue: issue,
     };
-    changeIssue(newIssue);
+    changeIssue(newIssue, today);
   }
 
   function minuteToHour(value) {

@@ -14,7 +14,7 @@ function DaysList({ createDay, day }) {
     createDay(todayDate);
   }, []);
 
-  localStorage.setItem("days", JSON.stringify(day));
+  // localStorage.setItem("days", JSON.stringify(day));
 
   const today = moment().format("ddd MMMM DD").split(" ");
   return (

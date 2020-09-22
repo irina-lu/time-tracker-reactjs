@@ -6,6 +6,7 @@ import {
   CHANGE_NAME,
   CHANGE_ISSUE,
   CREATE_DAY,
+  UPDATE_OF_DAY,
 } from "./types";
 
 export function openPopup() {
@@ -27,17 +28,19 @@ export function createWorklog(worklog) {
   };
 }
 
-export function changeName(name) {
+export function changeName(name, day) {
   return {
     type: CHANGE_NAME,
     payload: name,
+    day,
   };
 }
 
-export function changeIssue(issue) {
+export function changeIssue(issue, day) {
   return {
     type: CHANGE_ISSUE,
     payload: issue,
+    day,
   };
 }
 
@@ -52,5 +55,12 @@ export function createDay(key) {
   return {
     type: CREATE_DAY,
     key,
+  };
+}
+
+export function addWorklogInDay(day) {
+  return {
+    type: UPDATE_OF_DAY,
+    payload: day,
   };
 }
