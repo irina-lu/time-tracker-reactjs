@@ -3,37 +3,13 @@ import "./WorklogList.scss";
 import Worklog from "./Worklog";
 import { connect } from "react-redux";
 
-function WorklogList({ worklogs }) {
-  // const worklogs = [
-  //   {
-  //     name: "nameWorklog",
-  //     issue: "JRM-312",
-  //     started: 640,
-  //     ended: 690,
-  //     status: "",
-  //   },
-  //   {
-  //     name: "nameWorklog",
-  //     issue: "JRM-311",
-  //     started: 700,
-  //     ended: 730,
-  //     status: "",
-  //   },
-  // ];
-
+function WorklogList({ worklogs, date }) {
   return (
     <ul className="worklogs-list">
       {worklogs.map((worklog, index) => (
-        <Worklog worklog={worklog} key={index} index={index} />
+        <Worklog worklog={worklog} key={index} index={index} date={date} />
       ))}
     </ul>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    worklogs: state.worklogs,
-  };
-};
-
-export default connect(mapStateToProps, null)(WorklogList);
+export default connect(null, null)(WorklogList);

@@ -6,13 +6,11 @@ import { changeIssue } from "../redux/actions";
 import "./Worklog.scss";
 import WorklogOptions from "../WorklogOptions/WorklogOptions";
 
-function Worklog({ worklog, index, changeName, changeIssue }) {
+function Worklog({ date, worklog, index, changeName, changeIssue }) {
   const [nameWorklog, setNameWorklog] = useState(worklog.name);
   const [nameIssue, setNameIssue] = useState(worklog.issue);
 
   const today = moment().format("YYYY-MM-DD");
-
-  console.log(index);
 
   function handleChangeWorklog(e) {
     let name = e.target.value;
@@ -29,7 +27,6 @@ function Worklog({ worklog, index, changeName, changeIssue }) {
   }
 
   function handleChangeIssue(e) {
-    debugger;
     let issue = e.target.value;
     setNameIssue(e.target.value);
     changeWorklogIssue(issue);
@@ -72,7 +69,6 @@ function Worklog({ worklog, index, changeName, changeIssue }) {
             onChange={handleChangeIssue}
             autoComplete="off"
           />
-          {/* <span className="worklog__code-issue">{worklog.issue}</span> */}
           <input
             className="worklog__name"
             name="worklog-name"
@@ -80,7 +76,6 @@ function Worklog({ worklog, index, changeName, changeIssue }) {
             onChange={handleChangeWorklog}
             autoComplete="off"
           />
-          {/* <h4 className="worklog__name">{worklog.name}</h4> */}
         </div>
         <span className="worklog__time">{`${minuteToHour(time)}:00`}</span>
         <button className="worklog__btn">
@@ -93,21 +88,15 @@ function Worklog({ worklog, index, changeName, changeIssue }) {
         </button>
       </div>
       <div className="worklog__menu-wrapper">
-        <WorklogOptions />
+        <WorklogOptions date={date} index={index} />
       </div>
     </li>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    worklogs: state.worklogs,
-  };
-};
 
 const mapDispatchToProps = {
   changeName,
   changeIssue,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Worklog);
+export default connect(null, mapDispatchToProps)(Worklog);

@@ -1,9 +1,11 @@
 import React from "react";
+import moment from "moment";
 import "./Day.scss";
 import TimePicker from "./TimePicker";
 import WorklogList from "../Worklog/WorklogList";
 
-function Day({ today }) {
+function Day({ day }) {
+  const today = moment(day[0], "YYYY-MM-DD").format("ddd MMMM DD").split(" ");
   const [dayOfWeek, month, dayOfMonth] = today;
   return (
     <section className="day-list__item day">
@@ -24,7 +26,7 @@ function Day({ today }) {
           <span className="visually-hidden">Download</span>
         </button>
       </div>
-      <WorklogList />
+      <WorklogList date={day[0]} worklogs={day[1]} />
       <TimePicker />
     </section>
   );

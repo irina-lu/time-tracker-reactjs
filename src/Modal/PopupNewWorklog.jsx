@@ -22,8 +22,6 @@ function PopupNewWorklog(props) {
     setEnd(end);
   }
 
-  console.log(props.day);
-
   function submitHandler(e) {
     e.preventDefault();
     const isValid = validate();

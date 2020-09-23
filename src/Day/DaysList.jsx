@@ -6,20 +6,16 @@ import "./DaysList.scss";
 import Day from "./Day";
 
 function DaysList({ createDay, day }) {
-  // `${today.getMonth() + 1}.${today.getDate()}.${today.getFullYear()}`
-  // "9.21.2020"
-
   useEffect(() => {
     const todayDate = moment().format("YYYY-MM-DD");
     createDay(todayDate);
   }, []);
 
-  // localStorage.setItem("days", JSON.stringify(day));
-
-  const today = moment().format("ddd MMMM DD").split(" ");
   return (
     <div>
-      <Day today={today} />
+      {Object.entries(day).map((day, index) => (
+        <Day day={day} key={index} />
+      ))}
     </div>
   );
 }
