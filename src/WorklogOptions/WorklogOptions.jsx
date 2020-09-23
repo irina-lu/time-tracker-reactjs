@@ -1,7 +1,7 @@
 import React from "react";
 import "./WorklogOptions.scss";
 
-function WorklogOptions() {
+function WorklogOptions({ date, index }) {
   return (
     <ul className="worklog-options">
       <li className="worklog-options__item">

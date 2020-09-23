@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import "./PopupNewWorklog.scss";
 import Slider from "./Slider/Slider";
+import moment from "moment";
 import { connect } from "react-redux";
 import { openPopup } from "../redux/actions";
 import { startTimer } from "../redux/actions";
 import { createWorklog } from "../redux/actions";
 import { openNotification } from "../redux/actions";
+import { addWorklogInDay } from "../redux/actions";
 
 function PopupNewWorklog(props) {
   const [nameWorklog, setNameWorklog] = useState(props.nameWorklog);
   const [nameIssue, setNameIssue] = useState(props.nameIssue);
   const [nameError, setNameError] = useState("");
-
+  const today = moment().format("YYYY-MM-DD");
   const [start, setStart] = useState(0);
   const [end, setEnd] = useState(0);
 
@@ -20,24 +22,13 @@ function PopupNewWorklog(props) {
     setEnd(end);
   }
 
-  //TODO
   function submitHandler(e) {
     e.preventDefault();
     const isValid = validate();
     if (start === end) {
-      const warningStatus = {
-        status: "warning",
-        message: "You can't track less than minute.",
-      };
-      props.openNotification(warningStatus);
-      props.handleClick();
+      showWarningStatus("You can't track less than minute.");
     } else if (!isValid) {
-      const status = {
-        status: "warning",
-        message: "Please, enter the worklog name.",
-      };
-      props.openNotification(status);
-      props.handleClick();
+      showWarningStatus("Please, enter the worklog name.");
     } else {
       setNameError("");
       createNewWorklog();
@@ -66,6 +57,15 @@ function PopupNewWorklog(props) {
     return true;
   }
 
+  function showWarningStatus(message) {
+    const warningStatus = {
+      status: "warning",
+      message: message,
+    };
+    props.openNotification(warningStatus);
+    props.handleClick();
+  }
+
   function createNewWorklog() {
     const newWorklog = {
       name: nameWorklog,
@@ -75,6 +75,18 @@ function PopupNewWorklog(props) {
       status: "",
     };
     props.createWorklog(newWorklog);
+    const day = addInDay(newWorklog, today);
+    props.addWorklogInDay(day);
+  }
+
+  function addInDay(worklog, today) {
+    const day = props.day;
+    Object.keys(day).map((key) => {
+      if (key === today) {
+        day[key] = day[key].concat(worklog);
+      }
+    });
+    return day;
   }
 
   function handleChangeWorklog(e) {
@@ -151,6 +163,7 @@ function PopupNewWorklog(props) {
 
 const mapStateToProps = (state) => {
   return {
+    day: state.day,
     isOpen: state.popup,
     isStartTimer: state.timer,
     worklogs: state.worklogs,
@@ -163,6 +176,7 @@ const mapDispachToProps = {
   startTimer,
   createWorklog,
   openNotification,
+  addWorklogInDay,
 };
 
 export default connect(mapStateToProps, mapDispachToProps)(PopupNewWorklog);
