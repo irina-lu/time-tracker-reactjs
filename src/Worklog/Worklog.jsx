@@ -10,7 +10,7 @@ function Worklog({ date, worklog, index, changeName, changeIssue }) {
   const [nameWorklog, setNameWorklog] = useState(worklog.name);
   const [nameIssue, setNameIssue] = useState(worklog.issue);
 
-  const today = moment().format("YYYY-MM-DD");
+  const today = date;
 
   function handleChangeWorklog(e) {
     let name = e.target.value;
@@ -23,13 +23,13 @@ function Worklog({ date, worklog, index, changeName, changeIssue }) {
       id: index,
       name: name,
     };
-    changeName(newName, today);
+    // changeName(newName, today);
   }
 
   function handleChangeIssue(e) {
     let issue = e.target.value;
-    setNameIssue(e.target.value);
-    changeWorklogIssue(issue);
+    // setNameIssue(e.target.value);
+    // changeWorklogIssue(issue);
   }
 
   function changeWorklogIssue(issue) {
@@ -37,7 +37,7 @@ function Worklog({ date, worklog, index, changeName, changeIssue }) {
       id: index,
       issue: issue,
     };
-    changeIssue(newIssue, today);
+    // changeIssue(newIssue, today);
   }
 
   function minuteToHour(value) {
@@ -62,20 +62,22 @@ function Worklog({ date, worklog, index, changeName, changeIssue }) {
         </p>
         <span className="worklog__status"></span>
         <div className="worklog__name-wrapper">
-          <input
+          {/* <input
             className="worklog__code-issue"
             name="issue-name"
-            defaultValue={nameIssue}
+            defaultValue={worklog.issue}
             onChange={handleChangeIssue}
             autoComplete="off"
-          />
-          <input
+          /> */}
+          <span className="worklog__code-issue">{worklog.issue}</span>
+          {/* <input
             className="worklog__name"
             name="worklog-name"
-            defaultValue={nameWorklog}
+            defaultValue={worklog.name}
             onChange={handleChangeWorklog}
             autoComplete="off"
-          />
+          /> */}
+          <p className="worklog__name">{worklog.name}</p>
         </div>
         <span className="worklog__time">{`${minuteToHour(time)}:00`}</span>
         <button className="worklog__btn">

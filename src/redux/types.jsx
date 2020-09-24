@@ -6,3 +6,4 @@ export const CHANGE_ISSUE = "CHANGE_ISSUE";
 export const OPEN_NOTIFICATION = "OPEN_NOTIFICATION";
 export const CREATE_DAY = "CREATE_DAY";
 export const UPDATE_OF_DAY = "UPDATE_OF_DAY";
+export const DELETE_WORKLOG = "DELETE_WORKLOG";
