@@ -4,6 +4,7 @@ import {
   CHANGE_ISSUE,
   CHANGE_NAME,
   DELETE_WORKLOG,
+  SET_ALL_STATUSES,
 } from "./types";
 
 const initialState = {
@@ -27,32 +28,41 @@ export const dayReducer = (state = initialState, action) => {
       return { ...action.payload, ...state };
     case CHANGE_ISSUE:
       debugger;
-      let neededDay = Object.keys(state).find((day) => day === action.day);
-      let index = state[neededDay].findIndex(
-        (item, index) => index === action.payload.id
-      );
+      const neededIssue = getDayAndIndex(action);
 
       let newWorklog = {
-        ...state[neededDay][index],
+        ...state[neededIssue.day][neededIssue.index],
         issue: action.payload.issue,
+        status: action.payload.status,
       };
 
       return {
         ...state,
-        [neededDay]: [
-          ...state[neededDay].slice(0, index),
+        [neededIssue.day]: [
+          ...state[neededIssue.day].slice(0, neededIssue.index),
           newWorklog,
-          ...state[neededDay].slice(index + 1),
+          ...state[neededIssue.day].slice(neededIssue.index + 1),
         ],
       };
     case CHANGE_NAME:
       const neededName = getDayAndIndex(action);
-      state[neededName.day][neededName.index].name = action.payload.name;
+
+      let newName = {
+        ...state[neededName.day][neededName.index],
+        name: action.payload.name,
+        status: action.payload.status,
+      };
+
       return {
         ...state,
+        [neededName.day]: [
+          ...state[neededName.day].slice(0, neededName.index),
+          newName,
+          ...state[neededName.day].slice(neededName.index + 1),
+        ],
       };
+
     case DELETE_WORKLOG:
-      debugger;
       let day = Object.keys(state).find((day) => day === action.day);
       return {
         ...state,
@@ -61,6 +71,18 @@ export const dayReducer = (state = initialState, action) => {
           ...state[day].slice(action.payload + 1),
         ],
       };
+
+    case SET_ALL_STATUSES:
+      return {
+        ...state,
+        [action.day]: state[action.day].map((worklog, id) => {
+          return {
+            ...worklog,
+            status: action.statuses[id],
+          };
+        }),
+      };
+
     default:
       return state;
   }

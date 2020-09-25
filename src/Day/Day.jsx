@@ -3,18 +3,10 @@ import moment from "moment";
 import "./Day.scss";
 import TimePicker from "./TimePicker";
 import WorklogList from "../Worklog/WorklogList";
+import { connect } from "react-redux";
+import { setAllStatuses } from "../redux/actions";
 
-function Day({ day, displayNone, isDisable, disableClass }) {
-  // const today = moment().format("YYYY-MM-DD");
-  // let displayNone;
-
-  // if (today !== day[0] && day[1].length < 1) {
-  //   displayNone = { display: "none" };
-  //   return displayNone;
-  // } else {
-  //   console.log(false);
-  // }
-
+function Day({ day, displayNone, isDisable, disableClass, setAllStatuses }) {
   const date = moment(day[0], "YYYY-MM-DD").format("ddd MMMM DD").split(" ");
   const [dayOfWeek, month, dayOfMonth] = date;
 
@@ -50,6 +42,19 @@ function Day({ day, displayNone, isDisable, disableClass }) {
   }
   let percent = countPercent();
 
+  function setStatus() {
+    const correctIssues = ["JRM-310", "JRM-311", "JRM-312", "JRM-313"];
+    const statuses = [];
+    day[1].forEach((item) => {
+      if (item.issue === "") {
+        statuses.push("warning");
+      } else if (!correctIssues.includes(item.issue)) {
+        statuses.push("error");
+      } else statuses.push("done");
+    });
+    setAllStatuses(statuses, day[0]);
+  }
+
   return (
     <section className="day-list__item day" style={displayNone}>
       <div className="day__heading-wrapper">
@@ -67,6 +72,7 @@ function Day({ day, displayNone, isDisable, disableClass }) {
         </div>
         <button
           className="day__btn-download"
+          onClick={setStatus}
           disabled={isDisable}
           style={disableClass}
         >
@@ -79,4 +85,8 @@ function Day({ day, displayNone, isDisable, disableClass }) {
   );
 }
 
-export default Day;
+const mapDispatchToProps = {
+  setAllStatuses,
+};
+
+export default connect(null, mapDispatchToProps)(Day);

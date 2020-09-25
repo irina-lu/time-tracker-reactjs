@@ -1,5 +1,4 @@
 import {
-  CREATE_WORKLOG,
   OPEN_NOTIFICATION,
   OPEN_POPUP,
   START_TIMER,
@@ -8,6 +7,7 @@ import {
   CREATE_DAY,
   UPDATE_OF_DAY,
   DELETE_WORKLOG,
+  SET_ALL_STATUSES,
 } from "./types";
 
 export function openPopup() {
@@ -19,13 +19,6 @@ export function openPopup() {
 export function startTimer() {
   return {
     type: START_TIMER,
-  };
-}
-
-export function createWorklog(worklog) {
-  return {
-    type: CREATE_WORKLOG,
-    payload: worklog,
   };
 }
 
@@ -71,5 +64,13 @@ export function deleteWorklog(day, id) {
     type: DELETE_WORKLOG,
     day,
     payload: id,
+  };
+}
+
+export function setAllStatuses(statuses, day) {
+  return {
+    type: SET_ALL_STATUSES,
+    day,
+    statuses,
   };
 }

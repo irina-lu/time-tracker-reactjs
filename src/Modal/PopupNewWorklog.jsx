@@ -5,7 +5,6 @@ import moment from "moment";
 import { connect } from "react-redux";
 import { openPopup } from "../redux/actions";
 import { startTimer } from "../redux/actions";
-import { createWorklog } from "../redux/actions";
 import { openNotification } from "../redux/actions";
 import { addWorklogInDay } from "../redux/actions";
 
@@ -74,7 +73,6 @@ function PopupNewWorklog(props) {
       ended: end,
       status: "",
     };
-    props.createWorklog(newWorklog);
     const day = addInDay(newWorklog, today);
     props.addWorklogInDay(day);
   }
@@ -174,7 +172,6 @@ const mapStateToProps = (state) => {
 const mapDispachToProps = {
   openPopup,
   startTimer,
-  createWorklog,
   openNotification,
   addWorklogInDay,
 };
