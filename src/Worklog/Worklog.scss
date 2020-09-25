@@ -81,6 +81,7 @@
     margin-bottom: 2px;
     border: none;
     background-color: transparent;
+    width: 150px;
 
     &:focus {
         outline: none;
@@ -95,42 +96,10 @@
     font-weight: 600;
     border: none;
     background-color: transparent;
-    width: 300px;
+    width: 400px;
 
     &:focus {
         outline: none;
-    }
-}
-
-.worklog__bar {
-    position: relative;
-    margin-left: auto;
-    width: 106px;
-    height: 2px;
-    background-color: $light-gray;
-    margin-right: 50px;
-    flex-shrink: 0;
-}
-
-.worklog__value {
-    &_in-progress {
-        position: absolute;
-        top: -1px;
-        left: 0;
-        width: 49px;
-        height: 4px;
-        background-color: $in-progress;
-        border-radius: 5px;
-    }
-
-    &_full {
-        position: absolute;
-        top: -1px;
-        left: 0;
-        width: 106px;
-        height: 4px;
-        background-color: $done;
-        border-radius: 5px;
     }
 }
 
@@ -218,7 +187,7 @@
     z-index: 1;
     position: absolute;
     display: none;
-    top: 93px;
+    top: 91px;
     right: -37px;
 
     &:hover {
