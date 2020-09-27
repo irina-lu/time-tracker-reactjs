@@ -37,14 +37,6 @@ function ReactCalendar() {
         ][date.getMonth()]
       }
     />
-
-    // <div className="calendar__statuses-wrapper">
-    //   <p className="calendar__status">Done</p>
-    //   <p className="calendar__status calendar__status_in-progress">
-    //     In progress
-    //   </p>
-    //   <p className="calendar__status calendar__status_missed">Missed</p>
-    // </div>
   );
 }
 
