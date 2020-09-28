@@ -52,7 +52,6 @@
 }
 
 .day__progress-value {
-    // width: 66px;
     height: 6px;
     border-radius: 5px;
     background-color: $in-progress;
@@ -72,6 +71,10 @@
     background-color: $border;
     cursor: pointer;
     flex-shrink: 0;
+
+    &:focus {
+        outline: none;
+    }
 
     &::after {
         content: "";

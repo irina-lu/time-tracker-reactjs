@@ -1,8 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
 import "./GoogleSync.scss";
 import EventList from "./EventList";
+import { enableSync } from "../redux/actions";
 
-function GoogleSync() {
+function GoogleSync({ enableSync, sync }) {
   const eventList = [
     {
       id: 1,
@@ -19,6 +21,10 @@ function GoogleSync() {
     { id: 3, name: "Brainstorm", time: "15:00 — 16:15", status: "lavender" },
   ];
 
+  function toggleHandler() {
+    enableSync();
+  }
+
   return (
     <section className="google-sync">
       <div className="google-sync__title-wrapper">
@@ -28,15 +34,30 @@ function GoogleSync() {
           className="visually-hidden google-sync__checkbox"
           type="checkbox"
           name="sync-checkbox"
+          defaultChecked={!!sync}
         />
-        <label htmlFor="google-check" className="google-sync__label"></label>
+        <label
+          htmlFor="google-check"
+          className="google-sync__label"
+          onClick={toggleHandler}
+        ></label>
         <button className="google-sync__calendar">
           <span className="visually-hidden">Open calendar</span>
         </button>
       </div>
-      <EventList eventList={eventList} />
+      {sync ? <EventList eventList={eventList} /> : null}
     </section>
   );
 }
 
-export default GoogleSync;
+const mapStateToProps = (state) => {
+  return {
+    sync: state.sync,
+  };
+};
+
+const mapDispachToProps = {
+  enableSync,
+};
+
+export default connect(mapStateToProps, mapDispachToProps)(GoogleSync);

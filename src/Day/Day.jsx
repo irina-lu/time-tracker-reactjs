@@ -5,8 +5,17 @@ import TimePicker from "./TimePicker";
 import WorklogList from "../Worklog/WorklogList";
 import { connect } from "react-redux";
 import { setAllStatuses } from "../redux/actions";
+import { openNotification } from "../redux/actions";
 
-function Day({ day, displayNone, isDisable, disableClass, setAllStatuses }) {
+function Day({
+  day,
+  displayNone,
+  isDisable,
+  disableClass,
+  setAllStatuses,
+  openNotification,
+  handleClick,
+}) {
   const date = moment(day[0], "YYYY-MM-DD").format("ddd MMMM DD").split(" ");
   const [dayOfWeek, month, dayOfMonth] = date;
 
@@ -48,11 +57,34 @@ function Day({ day, displayNone, isDisable, disableClass, setAllStatuses }) {
     day[1].forEach((item) => {
       if (item.issue === "") {
         statuses.push("warning");
+        showWarningStatus(
+          "warning",
+          "Nothing to log. Please check issues assignment or description."
+        );
       } else if (!correctIssues.includes(item.issue)) {
         statuses.push("error");
-      } else statuses.push("done");
+        showWarningStatus("error", "Issue does not exist.");
+      } else {
+        statuses.push("done");
+      }
     });
+    const isAllItemsDone = statuses.every((item) => {
+      return item === "done";
+    });
+
+    if (isAllItemsDone) {
+      showWarningStatus("done", "Your worklog successfully logged.");
+    }
     setAllStatuses(statuses, day[0]);
+  }
+
+  function showWarningStatus(status, message) {
+    const warningStatus = {
+      status: status,
+      message: message,
+    };
+    openNotification(warningStatus);
+    handleClick();
   }
 
   return (
@@ -87,6 +119,7 @@ function Day({ day, displayNone, isDisable, disableClass, setAllStatuses }) {
 
 const mapDispatchToProps = {
   setAllStatuses,
+  openNotification,
 };
 
 export default connect(null, mapDispatchToProps)(Day);

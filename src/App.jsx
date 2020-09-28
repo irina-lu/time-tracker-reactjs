@@ -38,7 +38,11 @@ function App(props) {
   return (
     <div className="time-tracker-app">
       <Header />
-      <Main updateInfoWorklog={updateInfoWorklog} getTime={getTime} />
+      <Main
+        updateInfoWorklog={updateInfoWorklog}
+        getTime={getTime}
+        handleClick={handleClick}
+      />
       {props.isStoppedTimer ? (
         <PopupNewWorklog
           nameWorklog={nameWorklog}

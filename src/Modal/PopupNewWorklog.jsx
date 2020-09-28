@@ -164,7 +164,6 @@ const mapStateToProps = (state) => {
     day: state.day,
     isOpen: state.popup,
     isStartTimer: state.timer,
-    worklogs: state.worklogs,
     statusNotification: state.notification,
   };
 };

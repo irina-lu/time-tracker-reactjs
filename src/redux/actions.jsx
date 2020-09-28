@@ -8,6 +8,7 @@ import {
   UPDATE_OF_DAY,
   DELETE_WORKLOG,
   SET_ALL_STATUSES,
+  ENABLE_SYNC,
 } from "./types";
 
 export function openPopup() {
@@ -72,5 +73,11 @@ export function setAllStatuses(statuses, day) {
     type: SET_ALL_STATUSES,
     day,
     statuses,
+  };
+}
+
+export function enableSync() {
+  return {
+    type: ENABLE_SYNC,
   };
 }
