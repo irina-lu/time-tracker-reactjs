@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/time-tracker-reactjs/static/css/main.08d61229.chunk.css",
+    "main.js": "/time-tracker-reactjs/static/js/main.58317119.chunk.js",
+    "main.js.map": "/time-tracker-reactjs/static/js/main.58317119.chunk.js.map",
+    "runtime-main.js": "/time-tracker-reactjs/static/js/runtime-main.6d70756f.js",
+    "runtime-main.js.map": "/time-tracker-reactjs/static/js/runtime-main.6d70756f.js.map",
+    "static/js/2.e9688e71.chunk.js": "/time-tracker-reactjs/static/js/2.e9688e71.chunk.js",
+    "static/js/2.e9688e71.chunk.js.map": "/time-tracker-reactjs/static/js/2.e9688e71.chunk.js.map",
+    "index.html": "/time-tracker-reactjs/index.html",
+    "precache-manifest.dabe809225f7bcde982ab4b10e962b21.js": "/time-tracker-reactjs/precache-manifest.dabe809225f7bcde982ab4b10e962b21.js",
+    "service-worker.js": "/time-tracker-reactjs/service-worker.js",
+    "static/css/main.08d61229.chunk.css.map": "/time-tracker-reactjs/static/css/main.08d61229.chunk.css.map",
+    "static/js/2.e9688e71.chunk.js.LICENSE.txt": "/time-tracker-reactjs/static/js/2.e9688e71.chunk.js.LICENSE.txt",
+    "static/media/Day.scss": "/time-tracker-reactjs/static/media/btn-download.f18a9e37.svg",
+    "static/media/GoogleSync.scss": "/time-tracker-reactjs/static/media/calendar.87435557.svg",
+    "static/media/UserMenu.scss": "/time-tracker-reactjs/static/media/settings.bb64c586.svg",
+    "static/media/ActiveWorklog.scss": "/time-tracker-reactjs/static/media/play-white.05029022.svg",
+    "static/media/Worklog.scss": "/time-tracker-reactjs/static/media/play.58217e30.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6d70756f.js",
+    "static/js/2.e9688e71.chunk.js",
+    "static/css/main.08d61229.chunk.css",
+    "static/js/main.58317119.chunk.js"
+  ]
+}
