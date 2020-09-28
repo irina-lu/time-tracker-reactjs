@@ -7,7 +7,6 @@ function ReactCalendar() {
 
   function onChange(date) {
     setDate(date);
-    console.log(date);
   }
 
   return (

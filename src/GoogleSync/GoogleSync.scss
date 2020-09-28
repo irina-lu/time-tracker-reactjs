@@ -58,6 +58,10 @@
     }
 }
 
+.google-sync__checkbox:checked~.google-sync__calendar {
+    background-image: url("../assets/img/icon/calendar.svg");
+}
+
 .google-sync__calendar {
     border: none;
     background-color: transparent;

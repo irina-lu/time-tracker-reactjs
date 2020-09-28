@@ -8,7 +8,7 @@ function Main(props) {
   return (
     <main className="page-main">
       <h1 className="visually-hidden">Time Tracker</h1>
-      <MainScreen />
+      <MainScreen handleClick={props.handleClick} />
       <TimeTracking
         updateInfoWorklog={props.updateInfoWorklog}
         getTime={props.getTime}

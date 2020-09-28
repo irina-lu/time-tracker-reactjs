@@ -5,7 +5,7 @@ import { createDay } from "../redux/actions";
 import "./DaysList.scss";
 import Day from "./Day";
 
-function DaysList({ createDay, day }) {
+function DaysList({ createDay, day, handleClick }) {
   let todayDate = moment().format("YYYY-MM-DD");
   useEffect(() => {
     createDay(todayDate);
@@ -40,7 +40,7 @@ function DaysList({ createDay, day }) {
             />
           );
         } else {
-          return <Day day={day} key={index} />;
+          return <Day day={day} key={index} handleClick={handleClick} />;
         }
       })}
     </div>

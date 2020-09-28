@@ -22,9 +22,14 @@ function Worklog({ date, worklog, index, changeName, changeIssue }) {
   }
 
   function saveName(e) {
+    let name;
     if (e.key === "Enter") {
       if (e.target.tagName.toUpperCase() === "INPUT") {
-        let name = e.target.value;
+        if (e.target.value === "") {
+          name = worklog.name;
+        } else {
+          name = e.target.value;
+        }
         setClick(false);
         const newName = {
           id: index,

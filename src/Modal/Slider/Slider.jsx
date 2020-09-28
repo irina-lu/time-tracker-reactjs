@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { useEffect } from "react";
 import { Slider, Rail, Handles, Tracks } from "react-compound-slider";
 import "./Slider.scss";
@@ -17,21 +17,13 @@ function Slide({ startTime, endTime, update }) {
     return `${hours}:${minutes}`;
   }
 
-  // if (startTime === endTime) {
-  //   today.setMinutes(today.getMinutes() + 1);
-  //   endTime = `${today.getHours()}:${today.getMinutes()}`;
-  // }
-
   function timeToMinute(time) {
     let minute = +time.slice(3);
     return parseInt(time) * 60 + minute;
   }
 
   let startTimeMin = timeToMinute(startTime);
-  // console.log(startTimeMin);
-
   let endTimeMin = timeToMinute(endTime);
-  // console.log(endTimeMin);
 
   return (
     <Slider
@@ -123,7 +115,6 @@ function Track({
     valueStart.current = source.value;
     valueEnd.current = target.value;
     update(valueStart.current, valueEnd.current);
-    // console.log(`start: ${valueStart.current}; end: ${valueEnd.current}`);
   });
 
   return (

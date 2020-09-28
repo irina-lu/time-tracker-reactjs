@@ -1,6 +1,9 @@
 @import '../assets/color.scss';
 
 .header {
+    position: sticky;
+    z-index: 2;
+    top: 0;
     width: 100%;
     background-color: $violet;
     color: $white;

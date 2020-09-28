@@ -7,3 +7,4 @@ export const CREATE_DAY = "CREATE_DAY";
 export const UPDATE_OF_DAY = "UPDATE_OF_DAY";
 export const DELETE_WORKLOG = "DELETE_WORKLOG";
 export const SET_ALL_STATUSES = "SET_ALL_STATUSES";
+export const ENABLE_SYNC = "ENABLE_SYNC";

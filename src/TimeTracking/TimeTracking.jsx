@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./TimeTracking.scss";
 import WorklogOptions from "../WorklogOptions/WorklogOptions";
 import NewWorklog from "./NewWorklog";
