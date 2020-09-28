@@ -1,0 +1,66 @@
+@import '../assets/color.scss';
+
+.favorite {
+    padding-left: 23px;
+    padding-top: 2px;
+}
+
+.favorite__message {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 58px;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 35px;
+    color: $font-black;
+}
+
+.favorite__btn-wrapper {
+    width: 120px;
+    text-align: center;
+}
+
+.favorite__btn {
+    padding: 0;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 23px;
+    position: relative;
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    background-color: $white;
+    cursor: pointer;
+    box-shadow: 0px 7px 15px rgba(148, 156, 160, 0.13);
+
+    &:hover,
+    &:focus {
+        outline: none;
+        box-shadow: 0px 10px 30px rgba(163, 163, 163, 0.44);
+    }
+
+    &::after,
+    &::before {
+        content: "";
+        position: absolute;
+        top: 32px;
+        left: 25px;
+        width: 16px;
+        height: 2px;
+        border-radius: 5px;
+        background-color: #3744bd;
+    }
+
+    &::after {
+        transform: rotate(90deg);
+    }
+}
+
+.favorite__phrase {
+    font-size: 15px;
+    line-height: 26px;
+    text-transform: uppercase;
+    text-align: center;
+    color: $font-gray;
+}

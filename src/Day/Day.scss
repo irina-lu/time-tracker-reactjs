@@ -1,0 +1,88 @@
+@import "../assets/color.scss";
+
+.day {
+    padding-right: 68px;
+}
+
+.day__heading-wrapper {
+    display: flex;
+    padding-right: 35px;
+    padding-bottom: 16px;
+    margin-right: 15px;
+    border-bottom: 1px solid $border;
+}
+
+.day__date {
+    margin: 0;
+    padding: 0;
+    font-size: 23px;
+    line-height: 35px;
+    padding-top: 3px;
+    padding-left: 24px;
+    width: 255px;
+
+    &_not-bold {
+        font-weight: 400;
+    }
+}
+
+.day__total-time-wrapper {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 45px;
+}
+
+.day__total-time {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 35px;
+    color: $font-light-gray;
+}
+
+.day__progress-bar {
+    width: 100px;
+    height: 6px;
+    border-radius: 5px;
+    background-color: $border;
+}
+
+.day__progress-value {
+    height: 6px;
+    border-radius: 5px;
+    background-color: $in-progress;
+
+    &_full {
+        width: 100px;
+        background-color: $done;
+    }
+}
+
+.day__btn-download {
+    position: relative;
+    border: none;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: $border;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    &:focus {
+        outline: none;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 18px;
+        height: 18px;
+        background-image: url("../assets/img/icon/btn-download.svg");
+    }
+}

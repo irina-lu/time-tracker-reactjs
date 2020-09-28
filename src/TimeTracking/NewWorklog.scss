@@ -1,0 +1,50 @@
+@import '../assets/color.scss';
+
+.new-worklog {
+    padding-top: 28px;
+    padding-left: 13px;
+}
+
+.new-worklog__btn {
+    padding: 0;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 23px;
+    position: relative;
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    background-color: $white;
+    cursor: pointer;
+    box-shadow: 0px 7px 15px rgba(148, 156, 160, 0.13);
+
+    &:hover,
+    &:focus {
+        outline: none;
+        box-shadow: 0px 10px 30px rgba(163, 163, 163, 0.44);
+    }
+
+    &::after,
+    &::before {
+        content: "";
+        position: absolute;
+        top: 32px;
+        left: 25px;
+        width: 16px;
+        height: 2px;
+        border-radius: 5px;
+        background-color: #3744bd;
+    }
+
+    &::after {
+        transform: rotate(90deg);
+    }
+}
+
+.new-worklog__phrase {
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    color: $font-gray;
+}

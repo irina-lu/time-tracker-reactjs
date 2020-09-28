@@ -1,0 +1,19 @@
+@import '../assets/color.scss';
+
+.header {
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    width: 100%;
+    background-color: $violet;
+    color: $white;
+    padding: 26px 61px 19px 78px;
+
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1781px;
+    margin: 0 auto;
+}

@@ -1,0 +1,50 @@
+@import '../assets/color.scss';
+
+.event {
+    position: relative;
+    padding: 0 40px;
+    padding-top: 27px;
+    margin-bottom: 10px;
+    min-height: 168px;
+    border-radius: 10px;
+    background: $background-item;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: -1px;
+        top: 46px;
+        width: 3px;
+        height: 76px;
+        border-radius: 1px;
+    }
+
+    &_turquoise::before {
+        background-color: $turquoise;
+    }
+
+    &_orange::before {
+        background-color: $orange;
+    }
+
+    &_lavender::before {
+        background-color: $lavender;
+    }
+}
+
+.event__name {
+    margin: 0;
+    padding: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+    line-height: 29px;
+    font-weight: 600;
+}
+
+.event__time {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    line-height: 29px;
+    font-weight: 600;
+}
