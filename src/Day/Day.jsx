@@ -72,7 +72,7 @@ function Day({
       return item === "done";
     });
 
-    if (isAllItemsDone) {
+    if (isAllItemsDone && statuses.length > 0) {
       showWarningStatus("done", "Your worklog successfully logged.");
     }
     setAllStatuses(statuses, day[0]);
