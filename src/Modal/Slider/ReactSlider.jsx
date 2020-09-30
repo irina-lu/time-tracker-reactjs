@@ -1,13 +1,32 @@
-import React, { useRef } from "react";
-import { useEffect } from "react";
+import React, { useRef, useEffect } from "react";
+import moment from "moment";
+import { connect } from "react-redux";
 import { Slider, Rail, Handles, Tracks } from "react-compound-slider";
 import "./Slider.scss";
 
-function Slide({ startTime, endTime, update }) {
-  let valueStart = useRef();
-  let valueEnd = useRef();
+function ReactSlider({ startTime, endTime, update, day }) {
+  const todayDate = moment().format("YYYY-MM-DD");
+  const timeNow = useRef(new Date());
   const sevenAM = 420;
   const sevenPM = 1140;
+  let valueStart = useRef();
+  let valueEnd = useRef();
+
+  function calcStartTime() {
+    const endTimes = day[todayDate].map((item) => {
+      return item.ended;
+    });
+    return Math.max(...endTimes);
+  }
+
+  const sliderStart = calcStartTime();
+
+  let sliderEnd = timeToMinute(
+    `${timeNow.current
+      .getHours()
+      .toString()
+      .padStart(2, "0")}:${timeNow.current.getMinutes()}`
+  );
 
   function minuteToHour(value) {
     let hours = Math.floor(value / 60)
@@ -28,7 +47,10 @@ function Slide({ startTime, endTime, update }) {
   return (
     <Slider
       className="sliderStyle"
-      domain={[sevenAM, sevenPM]}
+      domain={[
+        isFinite(sliderStart) ? sliderStart : sevenAM,
+        sliderEnd > sevenPM ? sevenPM : sliderEnd,
+      ]}
       step={1}
       mode={2}
       values={[+startTimeMin, +endTimeMin]}
@@ -135,5 +157,10 @@ function Track({
     />
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    day: state.day,
+  };
+};
 
-export default Slide;
+export default connect(mapStateToProps, null)(ReactSlider);

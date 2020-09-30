@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./PopupNewWorklog.scss";
-import Slider from "./Slider/Slider";
+import ReactSlider from "./Slider/ReactSlider";
 import moment from "moment";
 import { connect } from "react-redux";
 import { openPopup } from "../redux/actions";
@@ -105,7 +105,7 @@ function PopupNewWorklog(props) {
           onSubmit={submitHandler}
         >
           <div className="popup-new-worklog__slider">
-            <Slider
+            <ReactSlider
               startTime={props.startTime}
               endTime={props.endTime}
               update={update}
