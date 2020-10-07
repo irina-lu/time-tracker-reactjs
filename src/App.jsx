@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-
 import Header from "./Header/Header";
 import Main from "./Main/Main";
 import PopupNewWorklog from "./Modal/PopupNewWorklog";
 import Notification from "./Modal/Notification";
 import { connect } from "react-redux";
+import PopupDeleteWorklog from "./Modal/PopupDeleteWorklog";
 
 function App(props) {
   const [nameWorklog, setNameWorklog] = useState("");
@@ -54,6 +54,7 @@ function App(props) {
         />
       ) : null}
       <Notification open={open} handleClose={handleClose} />
+      {/* <PopupDeleteWorklog /> */}
     </div>
   );
 }

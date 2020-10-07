@@ -1,0 +1,117 @@
+@import '../assets/color.scss';
+
+.overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(41, 41, 41, 0.2);
+}
+
+.popup-delete-worklog {
+    display: block;
+    width: 428px;
+    background-color: $white;
+    border-radius: 10px;
+    position: fixed;
+    z-index: 2;
+    top: calc(50% - 103px);
+    left: calc(50% - 214px);
+    box-shadow: 0px 15px 30px rgba(216, 226, 232, 0.12);
+}
+
+.popup-delete-worklog__message {
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    line-height: 26px;
+    font-weight: 600;
+    color: $font-black;
+    padding: 32px 0 24px 30px;
+    background: $background-title;
+    border-radius: 10px 10px 0px 0px;
+    margin-bottom: 30px;
+}
+
+.popup-delete-worklog__btn-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 117px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.popup-delete-worklog__submit {
+    position: relative;
+    border: none;
+    background-color: $white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 7px 15px rgba(148, 156, 160, 0.13);
+
+    &::before {
+        position: absolute;
+        left: 19px;
+        top: 21px;
+        content: "";
+        width: 15px;
+        height: 2px;
+        display: block;
+        border-radius: 5px;
+        transform: rotate(-45deg);
+        background-color: $done;
+    }
+
+    &::after {
+        position: absolute;
+        content: "";
+        top: 24px;
+        left: 15px;
+        width: 8px;
+        height: 2px;
+        display: block;
+        border-radius: 5px;
+        transform: rotate(-135deg);
+        background-color: $done;
+    }
+}
+
+.popup-delete-worklog__close {
+    position: relative;
+    border: none;
+    background-color: $white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 7px 15px rgba(148, 156, 160, 0.13);
+
+    &::before {
+        position: absolute;
+        content: "";
+        left: 15px;
+        top: 22px;
+        width: 15px;
+        height: 2px;
+        border-radius: 5px;
+        transform: rotate(-45deg);
+        background-color: $error;
+    }
+
+    &::after {
+        position: absolute;
+        content: "";
+        left: 15px;
+        top: 22px;
+        width: 15px;
+        height: 2px;
+        border-radius: 5px;
+        transform: rotate(45deg);
+        background-color: $error;
+    }
+}
