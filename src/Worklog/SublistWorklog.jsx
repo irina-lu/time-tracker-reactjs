@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { changeName } from "../redux/actions";
 import { changeIssue } from "../redux/actions";
-import "./Worklog.scss";
+import "./SublistWorklog.scss";
 import WorklogOptions from "../WorklogOptions/WorklogOptions";
-import Sublist from "./Sublist";
 
-function Worklog({ date, worklog, index, changeName, changeIssue }) {
+function SublistWorklog({ date, worklog, index, changeName, changeIssue }) {
   const [isClick, setClick] = useState(false);
-
-  const array = [];
 
   function minuteToHour(value) {
     let hours = Math.floor(value / 60)
@@ -66,21 +63,14 @@ function Worklog({ date, worklog, index, changeName, changeIssue }) {
   return (
     <li>
       <div className="worklog__wrapper">
-        <div className="worklog">
-          {array.length < 1 ? (
-            <p className="worklog__interval-time">
-              {minuteToHour(worklog.started)}
-              <span className="worklog__interval-time_gray">
-                {" "}
-                — {minuteToHour(worklog.ended)}
-              </span>
-            </p>
-          ) : (
-            <button className="worklog__interval-time-btn">
-              <span class="worklog__sublist-btn">{array.length}</span>
-            </button>
-          )}
-
+        <div className="sublist-worklog">
+          <p className="worklog__interval-time">
+            {minuteToHour(worklog.started)}
+            <span className="worklog__interval-time_gray">
+              {" "}
+              — {minuteToHour(worklog.ended)}
+            </span>
+          </p>
           <span
             className={`worklog__status worklog__status_${worklog.status}`}
           ></span>
@@ -128,7 +118,6 @@ function Worklog({ date, worklog, index, changeName, changeIssue }) {
           <WorklogOptions date={date} index={index} />
         </div>
       </div>
-      <Sublist array={array} date={date} />
     </li>
   );
 }
@@ -138,4 +127,4 @@ const mapDispatchToProps = {
   changeIssue,
 };
 
-export default connect(null, mapDispatchToProps)(Worklog);
+export default connect(null, mapDispatchToProps)(SublistWorklog);
